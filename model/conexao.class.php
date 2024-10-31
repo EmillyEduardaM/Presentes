@@ -18,6 +18,7 @@
             return self::$instance;
 }
         public static function closeConexao(){
+
         self::$instance = null;
 }
 }
