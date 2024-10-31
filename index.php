@@ -1,3 +1,4 @@
+
 <html>
     <head>
         <meta charset="UTF-8">
@@ -6,9 +7,10 @@
     <body>
         <?php
         
-        include './model/conexao.class.php';
-        include './model/produto.class.php';
-        //include './model/usuario.php';
+        include './model/Conexao.php';
+        include './model/produto.php';
+        include './model/usuario.php';
+        include './model/lista.php';
         
         //$u = new usuario();
         //echo $u->validaUsuario('a@a', 'a');
@@ -21,19 +23,18 @@
         //$p = new produto;
         //print_r($p->recebeProdutos());
         
-    
-        $l = new lista ();
-        print_r($l->addLista('a@a.com','lista de presentes'));
-        echo $l ->removeLista('a@a.com');
-        print_r($l->getLista('teste@teste.com'))
+        
+        $l = new lista();
+        //print_r($l->addLista('a@a.com','lista de presentes'));
+        echo $l->removeLista('a@a.com');
+        
+        echo 'aqui';
+        
         //var_dump(Conexao::getConexao());
         
-        echo $l->addItem('teste@teste.com', 2);
-        echo $l->removeItem("1","1");
-        echo 'aqui';
-
         
-
+        
+        
         
         ?>
     </body>
