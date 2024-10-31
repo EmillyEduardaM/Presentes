@@ -82,6 +82,8 @@ public function removeLista($email){
             $stmt->bindValue(1,$lista 'codigo');
             
             $stmt->bindValue(2,$produto);
+            $stmt = 
+
 
 
 }catch (Exception $ex) {
@@ -90,7 +92,11 @@ public function removeLista($email){
 }
     public function removeItem($lista, $produto) {
         try{
-            $sql = "Delete from item where lista_codigo = $lista"
+            $sql = "Delete from item where lista_codigo = $lista"."and produto_codigo = $produto";
+
+            $stmt->bindValue(1, $lista)
+            
+            $stmt->bindValue(1, $produto)
         }
 
     }

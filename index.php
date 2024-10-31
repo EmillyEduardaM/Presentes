@@ -25,11 +25,15 @@
         $l = new lista ();
         print_r($l->addLista('a@a.com','lista de presentes'));
         echo $l ->removeLista('a@a.com');
+        print_r($l->getLista('teste@teste.com'))
         //var_dump(Conexao::getConexao());
         
+        echo $l->addItem('teste@teste.com', 2);
+        echo $l->removeItem("1","1");
+        echo 'aqui';
+
         
-            echo 'aqui';
-        
+
         
         ?>
     </body>
