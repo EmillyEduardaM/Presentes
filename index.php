@@ -1,16 +1,10 @@
 
-<html>
-    <head>
-        <meta charset="UTF-8">
-        <title></title>
-    </head>
-    <body>
         <?php
         
-        include './model/Conexao.php';
-        include './model/produto.php';
+        include './model/conexao.class.php';
+        include './model/produto.class.php';
         include './model/usuario.php';
-        include './model/lista.php';
+        include './model/lista.class.php';
         
         //$u = new usuario();
         //echo $u->validaUsuario('a@a', 'a');
@@ -26,8 +20,10 @@
         
         $l = new lista();
         //print_r($l->addLista('a@a.com','lista de presentes'));
-        echo $l->removeLista('a@a.com');
+        //echo $l->removeLista('a@a.com');
         
+        print_r($l->getItens(1));
+
         echo 'aqui';
         
         //var_dump(Conexao::getConexao());
@@ -36,6 +32,4 @@
         
         
         
-        ?>
-    </body>
-</html>
+?>
