@@ -1,21 +1,17 @@
 <?php
-class produto{
+class produto
+{
 
-public function recebeProdutos(){
+    public function recebeProdutos()
+    {
 
-try{
+        try {
 
-$sql = "Select *from produto";
-$stmt = Conexao::getConexao()->query($sql);
-$result = $stmt->fetchAll(PDO::FETCH_BOTH);
-
-}
-catch (Exception $ex){
-return false;
-
-}
-}
-
-
-
+            $sql = "Select *from produto";
+            $stmt = Conexao::getConexao()->query($sql);
+            $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
 }

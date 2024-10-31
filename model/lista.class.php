@@ -1,103 +1,127 @@
 <?php
-class lista{
 
-public function addLista($email,$descricao){
+    class lista {
 
-try{
+    public function addLista($email, $descricao) {
+    try {
 
-$sql = "insert into lista values (?,?,?";
-$stmt = conexao::getConexao()->prepare($sql);
-$stmt  ->bindValue (1,"0");
-$stmt ->bindValue (2,"$descricao");
-$stmt->bindValue (3,"$email");
-
-$stmt  ->execute ();
-return true;
+        $sql = "Insert into lista Values(?,?,?)";
+        $stmt = Conexao::getConexao()->prepare($sql);
+        $stmt->bindValue(1, 0);
+        $stmt->bindValue(2, $descricao);
+        $stmt->bindValue(3, $email);
+        $stmt->execute();
+        
+    return true;
+}       
+    catch (Exception $ex) {
+    return false;
 }
-catch (Exception $ex){
-return false;
-
 }
-}
-
-public function removeLista($email){
-
-    try{
-    
-    $sql = "delete * from lista where usuario = ?";
-    $stmt = conexao::getConexao()->prepare($sql);
-    $stmt  ->bindValue (1,$email);
-
-    $stmt  ->execute ();
-
-    if($stmt ->rowCount ()>0){
-
-        return "lista excluida";
-    }
-
-    else{
-
-
-        return "nenhuma lista exclida ";
-    }
-
-    }
-    catch (Exception $ex){
-    return "erro ao excluir lista";
-    
-    }
-    }
-    public  function getLista($email) {
-        try{
-
-            $sql = "Select * from lista where usuario=?";
+    public function removeLista($email) {
+    try {
             
-            $stmt = Conexao::getConexao()->prepare($sql);
-            $stmt  ->bindValue (1,$email);
+        $sql = "delete from lista where usuario=?";
+        $stmt = Conexao::getConexao()->prepare($sql);
+        $stmt->bindValue(1, $email);
+        $stmt->execute();
 
-        $stmt  ->execute ();
+    if ($stmt->rowCount() > 0) {
+    return 'Lista Excluída';
+} 
+    else {
+    return 'Nenhuma lista excluída';
+}
+} 
+    catch (Exception $ex) {
+    return 'Erro ao excluir lista';
+}
+}
+    public function getLista($email) {
+    try {
     
-        if($stmt ->rowCount ()>0){
-            $result = $stmt->fetchAll(PDO::FETCH_BOTH);
+    $sql = "Select * from lista where usuario=?";
+    $stmt = Conexao::getConexao()->prepare($sql);
+    $stmt->bindValue(1, $email);
+    $stmt->execute();
 
-            return $result;
-        }
+        if ($stmt->rowCount() > 0) {
+        $result = $stmt->fetch(PDO::FETCH_BOTH);
+        return $result;
+}
         return false;
-        }
+} 
         catch (Exception $ex){
-            return false;
-    }
-    }
-    public function addItem($email,$produto){
-        try{
-            $lista = $this->getLista($email);
-            if(!$lista) {
-               return 'Lista nao encontrada';
+           
+}
+}
 
+    public function addItem($email, $produto) {
+    try {
+        
+        $lista = $this->getLista($email);
+        if (!$lista) {
+        return 'Lista não encontrada';
+}
+            $sql = "Insert into item Values (?, ?)";
+            $stmt = Conexao::getConexao()->prepare($sql);
 
+            $stmt->bindValue(1, $lista['codigo']);
+            $stmt->bindValue(2, $produto);
+
+            $stmt->execute();
+
+            return 'Produto adicionado com sucesso';
+        } catch (PDOException $ex) {
+            if ($ex->errorInfo[1] == 1062) {
+                return 'Produto adicionado a lista';
+            } else {
+                return 'Produto não adiocinado a lista';
             }
-            $sql = "Insert into item Values (?,?)";
-            $stmt = Conexao::getConexao()->prepare ($sql);
-
-            $stmt->bindValue(1,$lista 'codigo');
-            
-            $stmt->bindValue(2,$produto);
-            $stmt = 
-
-
-
-}catch (Exception $ex) {
-
-}
-}
-    public function removeItem($lista, $produto) {
-        try{
-            $sql = "Delete from item where lista_codigo = $lista"."and produto_codigo = $produto";
-
-            $stmt->bindValue(1, $lista)
-            
-            $stmt->bindValue(1, $produto)
         }
+    }
 
+    public function removeItem($lista, $produto) {
+        try {
+            $sql = "Delete from item where lista_codigo = $lista " . "and produto_codigo = $produto";
+            $stmt = Conexao::getConexao()->prepare($sql);
+            $stmt->bindValue(1, $lista);
+            $stmt->bindValue(2, $produto);
+
+            $stmt->execute();
+
+            if ($stmt->rowCount > 0) {
+                return 'Item excluído';
+            } else {
+                return 'Nenhum item removido';
+            }
+        } catch (Exception $ex) {
+            return 'Erro ao excluir';
+        }
     }
-    }
+    public function getItens($lista){
+    try{
+
+    $sql="select produto.codigo, produto.nome from produto"
+    ."inner join item on item.produto_codigo = produto.codigo"
+    ."where lista.codigo = ?";
+
+    $stmt = conexao::getConexao()->prepre ($sql);
+    $stmt = bindValue(1,$lista);
+    $stmt ->execute();
+
+    if($stmt->rowCount()>0){
+        $result = $stmt -> fetchAll(PDO::FETCH_BOTH);
+ 
+        return $result;
+
+}
+   
+
+}
+
+}
+
+
+}
+

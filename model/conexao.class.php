@@ -5,10 +5,12 @@
  * 
  * @author alexandre.paula
  */
-class Conexao {
+class Conexao
+{
     private static $instance;
 
-    public static function getConexao() {
+    public static function getConexao()
+    {
         if (!isset(self::$instance)) {
             try {
                 self::$instance = new PDO("mysql:host=localhost;dbname=presentes", "root", "");
@@ -17,13 +19,12 @@ class Conexao {
                 // Tratar erro de conexão
                 die("Erro ao conectar: " . $e->getMessage());
             }
-           
         }
         return self::$instance;
     }
 
-    public static function closeConexao() {
+    public static function closeConexao()
+    {
         self::$instance = null;
     }
 }
-   
